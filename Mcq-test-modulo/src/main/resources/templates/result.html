@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quiz Result</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+        }
+        .logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            height: 100px;
+        }
+        .feedback-block {
+            margin-bottom: 20px;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <img th:src="@{/images/logo.jpg}" alt="Logo" class="logo">
+
+    <h2 th:text="'Thank you! Your Reference ID: ' + ${referenceId}"></h2>
+   <!-- <p>Your Score: <span th:text="${score} + ' / ' + ${total}"></span></p>-->
+
+    <div th:each="f : ${feedback}" class="feedback-block">
+        <p><strong th:text="${f.question}"></strong></p>
+        <p>Your Answer: <span th:text="${f.selected}"></span></p>
+        <p>Correct Answer: <span th:text="${f.correct}"></span></p>
+        <p th:if="${f.isCorrect}" class="correct">✔ Correct</p>
+        <p th:if="${!f.isCorrect}" class="incorrect">✘ Incorrect</p>
+        <hr>
+    </div>
+</body>
+</html>
